@@ -1,0 +1,22 @@
+
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+BTS7960AD KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+begin			KEYWORD2
+enable			KEYWORD2
+calibrate		KEYWORD2
+controlActuator		KEYWORD2
+actuateByPercent	KEYWORD2
+actuateByDistance	KEYWORD2
+stop			KEYWORD2
+displayOutput		KEYWORD2
+
+###########################################
+# Constants (LITERAL1)
+###########################################
