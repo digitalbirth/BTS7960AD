@@ -1,9 +1,9 @@
 <div id="top"></div>
 
-# BTS7960 Linear Actuator Driver for potentiometer feedback linear actuator
+# BTS7960 Linear Actuator Driver 
+## for potentiometer feedback linear actuator
 
-** Designed and tested using STM32 Black Pill
-Built for Arduino **
+**Designed and tested using STM32 Black Pill Built for Arduino.**
 
 ## How to use
 
@@ -12,14 +12,15 @@ Built for Arduino **
 `BTS7960AD actuator(R_EN, R_PWM, R_IS, L_EN, L_PWM, L_IS, sensor, strokeLength, debug);`
 
 ### Pin out for BTS7960
-- 1 RPWM Forward Level or PWM signal, Active High
-- 2 LPWM Reverse Level or PWM signal, Active High
-- 3 R_EN Forward Drive Enable Input, Active High/ Low Disable
-- 4 L_EN Reverse Drive Enable Input, Active High/Low Disable
-- 5 R_IS Forward Drive, Side current alarm output
-- 6 L_IS Reverse Drive, Side current alarm output
-- 7 Vcc +5V Power Supply micro-controller
-- 8 Gnd Ground Power Supply micro-controller
+
+1. RPWM Forward Level or PWM signal, **Active High**
+2. LPWM Reverse Level or PWM signal, **Active High**
+3. R_EN Forward Drive Enable Input, **Active High/ Low Disable**
+4. L_EN Reverse Drive Enable Input, **Active High/Low Disable**
+5. R_IS Forward Drive, Side current alarm output
+6. L_IS Reverse Drive, Side current alarm output
+7. Vcc +5V Power Supply micro-controller
+8. Gnd Ground Power Supply micro-controller
 
 ## Methods in set up
 
@@ -73,7 +74,9 @@ See the [open issues](https://github.com/digitalbirth/BTS7960AD/issues) for a fu
 <!-- CONTACT -->
 ## Contact
 
-Dean Bateman - [https://www.linkedin.com/in/deanbateman/](https://www.linkedin.com/in/deanbateman/) - quotes@digitalbirth.com.au
+Dean Bateman 
+- [https://www.linkedin.com/in/deanbateman/](https://www.linkedin.com/in/deanbateman/) 
+- quotes@digitalbirth.com.au
 
 Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/digitalbirth/BTS7960AD)
 
@@ -88,4 +91,5 @@ Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/dig
 	  / / / / / __ `/ / __/ __ `/ /  / __  / / ___/ __/ __ \   
 	 / /_/ / / /_/ / / /_/ /_/ / /  / /_/ / / /  / /_/ / / /  
 	/_____/_/\__, /_/\__/\__,_/_/  /_____/_/_/   \__/_/ /_/ 
-            /____/                                          
+            /____/    
+        ------------ BRINGING YOUR IDEAS TO LIFE ------------                                      
