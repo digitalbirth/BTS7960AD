@@ -1,9 +1,28 @@
 <div id="top"></div>
 
-# BTS7960 Linear Actuator Driver 
-## for potentiometer feedback linear actuator
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/github_username/repo_name">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-**Designed and tested using STM32 Black Pill Built for Arduino.**
+<h1 align="center">BTS7960 Linear Actuator Driver</h1>
+
+  <p align="center">
+    control for potentiometer feedback linear actuator
+    <strong>Designed and tested using STM32 Black Pill Built for Arduino.</strong>
+    <br />
+    <a href="https://github.com/digitalbirth/BTS7960AD"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/digitalbirth/BTS7960AD/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/digitalbirth/BTS7960AD/issues">Request Feature</a>
+  </p>
+  
+</div>
+
 
 ## How to use
 
