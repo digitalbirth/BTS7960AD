@@ -4,13 +4,14 @@
 <br />
 <div align="center">
   <a href="https://github.com/digitalbirth/BTS7960AD">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo_bg.png" alt="Logo" width="80" height="80">
   </a>
 
 <h1 align="center">BTS7960 Linear Actuator Driver</h1>
 
   <p align="center">
-    control for potentiometer feedback linear actuator
+    Control for potentiometer feedback linear actuator
+    <br />
     <strong>Designed and tested using STM32 Black Pill Built for Arduino.</strong>
     <br />
     <a href="https://github.com/digitalbirth/BTS7960AD"><strong>Explore the docs »</strong></a>
