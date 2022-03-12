@@ -14,8 +14,8 @@
     <br />
     <strong>Designed and tested using STM32 Black Pill Built for Arduino.</strong>
     <br />
-    <a href="https://github.com/digitalbirth/BTS7960AD"><strong>Explore the docs »</strong></a>
     <br />
+    <a href="https://github.com/digitalbirth/BTS7960AD"><strong>Explore the docs »</strong></a>
     <br />
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Report Bug</a>
     ·
@@ -44,15 +44,15 @@
 
 ## Methods in set up
 
-`actuator.init();`      resets actuator id's in EEPROM.
+`actuator.init();`      Resets actuator id's in EEPROM. (important)
 
-`actuator.begin();`     sets up actuator pins defined in object and EEPROM memory positions.
+`actuator.begin();`     Sets up actuator pins defined in object and EEPROM memory positions.
 
-`actuator.enable(true);`  enable driver pins R_EN and L_EN bringing them high. (May have issues - connected EN pins to the +ve rail so always on)
+`actuator.enable(true);`  Enable driver pins R_EN and L_EN bringing them high. (May have issues - connected EN pins to the +ve rail so always on)
 
-`actuator.calibrate(127);`   fully extends and retracts to record min max potentiometer values.
+`actuator.calibrate(127);`   Fully extends and retracts to record min max potentiometer values.
 
-On initial start the calibrate function will test to see if there are values saved in EEPROM, if not it will fully extend and retract and record the min max values of the potentiometer and save to EEPROM, when the board is re-powered, the values can be pulled from EEPROM saving loading time.
+On initial start the calibrate function will test to see if there are values saved in EEPROM, if not it will fully extend and retract and record the min max values of the potentiometer and save to EEPROM as these can differ from the min max values due to gearing, when the board is re-powered, the values can be pulled from EEPROM saving loading time.
 
  
 `actuator.recalibrate(127);`   The actuators can be recalibrated by calling method, this is called from a button press in the example sketch.
@@ -63,8 +63,7 @@ On initial start the calibrate function will test to see if there are values sav
 
 ### Direction
 
-extend  = 1             stop    = 0             retract = -1
-
+| extend  = 1  | stop    = 0  | retract = -1  |
 
 ### Speed
 
@@ -74,7 +73,7 @@ input value between 0-255
 
 `actuator.controlActuator(1, 127);` direction and speed
 
-`actuator.actuateByDistance(75, 1, 50);` distance mm, direction and speed
+`actuator.actuateByDistance(25, 1, 50);` distance mm, direction and speed
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
