@@ -18,49 +18,58 @@
 #define BTS7960AD_H
 
 #include "Arduino.h"
+#include "EEPROM.h"
 
 class BTS7960AD {
-  public:
-      //Constructor
-      BTS7960AD(bool R_EN, int R_PWM, int R_IS, bool L_EN, int L_PWM, int L_IS, int sensor, float strokeLength, bool debug);
+    public:
+        //Constructor
+        BTS7960AD(bool R_EN, int R_PWM, int R_IS, bool L_EN, int L_PWM, int L_IS, int sensor, float strokeLength, bool debug);
 
-      //Methods
-      void begin();                                             //Initializes the actuator.
-      void enable(bool value);                                  //Enable BTS7960 driver pins
-      void calibrate(int speed = 127);                          //calibrate min / max length
-      void controlActuator(int direction, int speed);           //General control using min max readings
-      void actuateByPercent(int percent, int speed);                //Control Actuator by percent (0-100) and direction (Retract-Extend)
-      void actuateByDistance(int mm, int direction, int speed); //Control Actuator by distance in mm
-      void stop();                                              //stops the actuator  
-      void displayOutput();
+        //Methods
+        void init();                                              //reset the actuator id.
+        void begin();                                             //Initializes the actuator.
+        void enable(bool value);                                  //Enable BTS7960 driver pins
+        void calibrate(int speed = 127);                          //calibrate min / max length
+        void recalibrate(int speed = 127);                        //recalibrate and save to eeprom
+        void controlActuator(int direction, int speed);           //General control using min max readings
+        void actuateByPercent(int percent, int speed);                //Control Actuator by percent (0-100) and direction (Retract-Extend)
+        void actuateByDistance(int mm, int direction, int speed); //Control Actuator by distance in mm
+        void stop();                                              //stops the actuator  
+        void displayOutput();
 
-      //Variables
-      int speed = 127;
-      int sensorVal;
+        //Variables
+        int speed = 127;
+        int sensorVal;
   	
-  private:
-      //Methods
-      int moveToLimit(int direction, int speed);                //move to limits to set min max readings
-      void driveActuator(int direction, int speed);             //Control by direction (1= extend, 0= stop, -1= retract) and speed (0-255)
-      int percentToAnalog(int percent);
-      float postion(float x, float inputMin, float inputMax, float outputMin, float outputMax);
+    private:
+        //Methods
+        int moveToLimit(int direction, int speed);                //move to limits to set min max readings
+        void driveActuator(int direction, int speed);             //Control by direction (1= extend, 0= stop, -1= retract) and speed (0-255)
+        int percentToAnalog(int percent);
+        float postion(float x, float inputMin, float inputMax, float outputMin, float outputMax);
 
-      //Variables
-      int en_R;
-      int pwm_R;
-      int is_R;
-      int en_L;
-      int pwm_L;
-      int is_L;
-      int sensor;
-      float stroke;
-      int debug;
-      int timeElapsed = 0;
-      double version = 1.00;
-      float extensionLength;
-      int maxAnalogReading = 1023;
-      int minAnalogReading = 0;
-      int targetPos;
-      float mmTravel;
+        //Variables
+        int en_R;
+        int pwm_R;
+        int is_R;
+        int en_L;
+        int pwm_L;
+        int is_L;
+        int sensor;
+        float stroke;
+        int debug;
+        const unsigned long period = 200;  //the value is a number of milliseconds
+        double version = 1.00;
+        int id;
+        int tempID = 0;
+        int configPosition; 
+        int configValue = 0;
+        int minAnalogPosition;
+        int minAnalogReading = 0;
+        int maxAnalogPosition;
+        int maxAnalogReading = 1023;
+        int targetPos;
+        float mmTravel;
+        float extensionLength;
 };
 #endif
