@@ -8,6 +8,7 @@ Built for Arduino **
 ## How to use
 
 ### Define object
+
 `BTS7960AD actuator(R_EN, R_PWM, R_IS, L_EN, L_PWM, L_IS, sensor, strokeLength, debug);`
 
 ### Pin out for BTS7960
@@ -20,7 +21,8 @@ Built for Arduino **
 - 7 Vcc +5V Power Supply micro-controller
 - 8 Gnd Ground Power Supply micro-controller
 
-### Methods in set up
+## Methods in set up
+
 `actuator.init();`      resets actuator id's in EEPROM.
 
 `actuator.begin();`     sets up actuator pins defined in object and EEPROM memory positions.
@@ -34,23 +36,26 @@ On initial start the calibrate function will test to see if there are values sav
  
 `actuator.recalibrate(127);`   The actuators can be recalibrated by calling method, this is called from a button press in the example sketch.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Methods in loop
+## Methods in loop
 
-#### Direction
+### Direction
 
 extend  = 1             stop    = 0             retract = -1
 
 
-#### Speed
+### Speed
 
 input value between 0-255
 
-#### Methods
+### Methods
 
 `actuator.controlActuator(1, 127);` direction and speed
 
 `actuator.actuateByDistance(75, 1, 50);` distance mm, direction and speed
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
