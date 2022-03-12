@@ -63,7 +63,11 @@ On initial start the calibrate function will test to see if there are values sav
 
 ### Direction
 
-| extend  = 1  | stop    = 0  | retract = -1  |
+| Action  | Direction |
+| ------------- | ------------- |
+| Extend  | 1  |
+| Stop  | 0  |
+| Retract  | -1  |
 
 ### Speed
 
@@ -71,9 +75,9 @@ input value between 0-255
 
 ### Methods
 
-`actuator.controlActuator(1, 127);` direction and speed
+`actuator.controlActuator(1, 127);` Direction and speed
 
-`actuator.actuateByDistance(25, 1, 50);` distance mm, direction and speed
+`actuator.actuateByDistance(25, 1, 50);` Distance mm, direction and speed
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -83,7 +87,7 @@ input value between 0-255
 - [ ] Add Calibration for multiple actuators - Test
 - [ ] Synchronized motor movement function
 - [ ] Add position memory
-    - [ ] Digital read buttons
+    - [ ] Digital read buttons for memory positions
 
 See the [open issues](https://github.com/digitalbirth/BTS7960AD/issues) for a full list of proposed features (and known issues).
 
