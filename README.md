@@ -105,14 +105,6 @@ Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/dig
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
 
-[![paypal](https://pics.paypal.com/00/s/ZDIyMGRlYzgtYjc4NC00OTVhLWEzZWQtZjg2YzFjMDJkN2Uy/file.PNG)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
-
-<form action="https://www.paypal.com/donate" method="post" target="_top">
-<input type="hidden" name="hosted_button_id" value="YFJKGDDSEL7D2" />
-<input type="image" src="https://pics.paypal.com/00/s/ZDIyMGRlYzgtYjc4NC00OTVhLWEzZWQtZjg2YzFjMDJkN2Uy/file.PNG" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
-</form>
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Coded by
