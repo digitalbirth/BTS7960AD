@@ -27,7 +27,12 @@
 </div>
 
 <div align="center">
-    <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" alt="BTS7960">
+        <div width="50%">
+                <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" alt="BTS7960">
+        </div>
+        <div width="50%">
+                <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" alt="BTS7960">
+        </div>
 </div>
 
 
