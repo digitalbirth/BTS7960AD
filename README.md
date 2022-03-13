@@ -21,7 +21,7 @@
     ·
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Request Feature</a>
     .
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate"></a>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2">Donate</a>
   </p>
   
 </div>
@@ -102,10 +102,9 @@ See the [open issues](https://github.com/digitalbirth/BTS7960AD/issues) for a fu
 Dean Bateman 
 - [https://www.linkedin.com/in/deanbateman/](https://www.linkedin.com/in/deanbateman/) 
 - quotes@digitalbirth.com.au
+- [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
 
 Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/digitalbirth/BTS7960AD)
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
