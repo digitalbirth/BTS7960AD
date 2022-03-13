@@ -20,8 +20,16 @@
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Report Bug</a>
     ·
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Request Feature</a>
+    .
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2">Donate</a>
   </p>
   
+</div>
+<br />
+<br />
+<div align="center">
+        <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>
+        <img src="images/linear-actuator.jpg" width="250"/>
 </div>
 
 
@@ -97,14 +105,23 @@ See the [open issues](https://github.com/digitalbirth/BTS7960AD/issues) for a fu
 <!-- CONTACT -->
 ## Contact
 
-Dean Bateman 
+A simple star to this project repo is enough to keep me motivated on this project for days. If you find your self very much excited with this project let me know.
+
+[<img src="images/linkedin.png" height="40em" align="center" alt="Follow Digital Birth on LinkedIn" title="Follow Digital Birth on LinkedIn"/>](https://www.linkedin.com/company/digitalbirth)
+[<img src="images/instagram.svg" height="40em" align="center" alt="Follow Digital Birth on Instagram" title="Follow Digital Birth on Instagram"/>](https://www.instagram.com/digitalbirthau/)
+
+**Dean Bateman** 
 - [https://www.linkedin.com/in/deanbateman/](https://www.linkedin.com/in/deanbateman/) 
 - quotes@digitalbirth.com.au
+- [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
+
+
+
+
 
 Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/digitalbirth/BTS7960AD)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ## Coded by
 
