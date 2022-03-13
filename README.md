@@ -29,7 +29,7 @@
 
 
 [<img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>](BTS7960)
-[<img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>](BTS7960)
+[<img src="images/linear-actuator.jpg" width="250"/>](Linear Actuator)
 
 
 ## How to use
