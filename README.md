@@ -26,14 +26,10 @@
   
 </div>
 
-<div align="center">
-        <div width="50%">
-                <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" alt="BTS7960" width="200" height="200">
-        </div>
-        <div width="50%">
-                <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" alt="BTS7960" width="200" height="200">
-        </div>
-</div>
+
+
+[<img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>](BTS7960)
+[<img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>](BTS7960)
 
 
 ## How to use
@@ -110,13 +106,17 @@ See the [open issues](https://github.com/digitalbirth/BTS7960AD/issues) for a fu
 
 A simple star to this project repo is enough to keep me motivated on this project for days. If you find your self very much excited with this project let me know.
 
+[<img src="images/linkedin.png" height="40em" align="center" alt="Follow Digital Birth on LinkedIn" title="Follow Digital Birth on LinkedIn"/>](https://www.linkedin.com/company/digitalbirth)
+[<img src="images/instagram.svg" height="40em" align="center" alt="Follow Digital Birth on Instagram" title="Follow Digital Birth on Instagram"/>](https://www.instagram.com/digitalbirthau/)
+
 **Dean Bateman** 
 - [https://www.linkedin.com/in/deanbateman/](https://www.linkedin.com/in/deanbateman/) 
 - quotes@digitalbirth.com.au
 - [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
 
-[<img src="images/linkedin.png" height="40em" align="center" alt="Follow Digital Birth on LinkedIn" title="Follow Digital Birth on LinkedIn"/>](https://www.linkedin.com/company/digitalbirth)
-[<img src="images/instagram.svg" height="40em" align="center" alt="Follow Digital Birth on Instagram" title="Follow Digital Birth on Instagram"/>](https://www.instagram.com/digitalbirthau/)
+
+
+
 
 Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/digitalbirth/BTS7960AD)
 
