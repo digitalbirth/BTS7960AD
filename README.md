@@ -20,6 +20,8 @@
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Report Bug</a>
     ·
     <a href="https://github.com/digitalbirth/BTS7960AD/issues">Request Feature</a>
+    .
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Donate"></a>
   </p>
   
 </div>
