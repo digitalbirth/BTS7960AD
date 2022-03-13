@@ -103,6 +103,9 @@ Dean Bateman
 
 Project Link: [https://github.com/digitalbirth/BTS7960AD](https://github.com/digitalbirth/BTS7960AD)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
+
+[![paypal](https://pics.paypal.com/00/s/ZDIyMGRlYzgtYjc4NC00OTVhLWEzZWQtZjg2YzFjMDJkN2Uy/file.PNG)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2)
 
 <form action="https://www.paypal.com/donate" method="post" target="_top">
 <input type="hidden" name="hosted_button_id" value="YFJKGDDSEL7D2" />
