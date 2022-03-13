@@ -25,11 +25,12 @@
   </p>
   
 </div>
-
-
-
-[<img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>](BTS7960)
-[<img src="images/linear-actuator.jpg" width="250"/>](Linear Actuator)
+<br />
+<br />
+<div align="center">
+        <img src="images/bts7960-h-bridge-motor-driver-max-43a.jpg" width="250"/>
+        <img src="images/linear-actuator.jpg" width="250"/>
+</div>
 
 
 ## How to use
