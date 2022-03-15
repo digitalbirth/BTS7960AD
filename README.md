@@ -6,9 +6,7 @@
   <a href="https://github.com/digitalbirth/BTS7960AD">
     <img src="images/logo_bg.png" alt="Logo" width="80" height="80">
   </a>
-
-<h1 align="center">BTS7960 Linear Actuator Driver</h1>
-
+  <h1 align="center">BTS7960 Linear Actuator Driver</h1>
   <p align="center">
     Control for potentiometer feedback linear actuator
     <br />
@@ -23,7 +21,6 @@
     .
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YFJKGDDSEL7D2">Donate</a>
   </p>
-  
 </div>
 <br />
 <br />
