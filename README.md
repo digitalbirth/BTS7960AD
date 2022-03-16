@@ -49,6 +49,9 @@
 8. Gnd Ground Power Supply micro-controller
 
 ## Methods
+
+### Initialisation
+
 `BTS7960AD::getInstanceCount();`                    Get number of instances created with constructor
 
 `actuator.init();`                                  Resets actuator id's in EEPROM. (important) only needs to be called once in set up
@@ -56,6 +59,8 @@
 `actuator.begin();`                                 Sets up actuator pins defined in object and EEPROM memory positions.
 
 `actuator.enable(true);`                            (True/ False) Enable driver pins R_EN and L_EN bringing them high. (May have issues - connected EN pins to the +ve rail so always on)
+
+### Calibration
 
 On initial start the calibrate function will test to see if there are values saved in EEPROM, if not it will fully extend and retract and record the min max values of the potentiometer and save to EEPROM as these can differ from the min max values due to gearing, when the board is re-powered, the values can be pulled from EEPROM saving loading time.
 
@@ -71,9 +76,13 @@ On initial start the calibrate function will test to see if there are values sav
 
 `BTS7960AD::recalibrateAll();`                      **TO DO** call to recalibrate all actuators at the same time
 
+### Speed
+
 `BTS7960AD::averageSpeed ();`                       Returns average speed for all actuators
 
 `actuator.setSpeed(int newSpeed);`                  (0 -255) Sets speed for individual constructor
+
+### Movement
 
 `actuator.stop();`                                                        Stops the actuator  
 
@@ -89,7 +98,12 @@ On initial start the calibrate function will test to see if there are values sav
 
 `actuator.moveAllToSetSpeed(uint32_t position, int speed);`              (position in mm, 0-255) Uses defined speed of all actuators to move to position in mm
 
+### Non blocking update call
+
 `BTS7960AD::update();`                                                  Updates millis and calls update(now) which updates position of all actuators with a new target position set
+
+
+### Utilities
 
 `actuator.getPosition (void);`                                          Returns position in mm
 
