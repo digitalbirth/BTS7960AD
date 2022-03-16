@@ -7,6 +7,7 @@
     <img src="images/logo_bg.png" alt="Logo" width="80" height="80">
   </a>
   <h1 align="center">BTS7960 Linear Actuator Driver</h1>
+  <h2 align="center">Not Tested!!</h2>
   <p align="center">
     Control for potentiometer feedback linear actuator
     <br />
