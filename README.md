@@ -47,7 +47,7 @@
 7. Vcc +5V Power Supply micro-controller
 8. Gnd Ground Power Supply micro-controller
 
-## Methods in set up
+## Methods
 `BTS7960AD::getInstanceCount();`                    Get number of instances created with constructor
 
 `actuator.init();`                                  Resets actuator id's in EEPROM. (important) only needs to be called once in set up
@@ -97,7 +97,7 @@ On initial start the calibrate function will test to see if there are values sav
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Methods in loop
+## Methods inputs
 
 ### Direction
 
@@ -111,11 +111,11 @@ On initial start the calibrate function will test to see if there are values sav
 
 input value between 0-255
 
-### Methods
+### Position
 
-`actuator.moveToLimit(1, 127);` Direction and speed
+distance required in whole mm's along the length of the stroke
 
-`actuator.moveTo(50);` Distance mm
+if 50mm stroke the value can be 0-50
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -123,7 +123,7 @@ input value between 0-255
 ## Roadmap
 
 - [ ] Add Calibration for multiple actuators - Test
-- [ ] Synchronized motor movement function
+- [ ] Synchronized motor movement function - Test
 - [ ] Add position memory
     - [ ] Digital read buttons for memory positions
 
