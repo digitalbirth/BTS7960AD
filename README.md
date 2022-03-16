@@ -48,19 +48,52 @@
 8. Gnd Ground Power Supply micro-controller
 
 ## Methods in set up
+`BTS7960AD::getInstanceCount();`                    Get number of instances created with constructor
 
-`actuator.init();`      Resets actuator id's in EEPROM. (important)
+`actuator.init();`                                  Resets actuator id's in EEPROM. (important) only needs to be called once in set up
 
-`actuator.begin();`     Sets up actuator pins defined in object and EEPROM memory positions.
+`actuator.begin();`                                 Sets up actuator pins defined in object and EEPROM memory positions.
 
-`actuator.enable(true);`  Enable driver pins R_EN and L_EN bringing them high. (May have issues - connected EN pins to the +ve rail so always on)
-
-`actuator.calibrate(127);`   Fully extends and retracts to record min max potentiometer values.
+`actuator.enable(true);`                            (True/ False) Enable driver pins R_EN and L_EN bringing them high. (May have issues - connected EN pins to the +ve rail so always on)
 
 On initial start the calibrate function will test to see if there are values saved in EEPROM, if not it will fully extend and retract and record the min max values of the potentiometer and save to EEPROM as these can differ from the min max values due to gearing, when the board is re-powered, the values can be pulled from EEPROM saving loading time.
 
- 
-`actuator.recalibrate(127);`   The actuators can be recalibrated by calling method, this is called from a button press in the example sketch.
+`actuator.calibrate(int speed);`                    (0 -255) Fully extends and retracts to record min max potentiometer values. 
+
+`actuator.calibrationValues(int min, int max);`     Adds calibration data to eeprom
+
+`actuator.calibrate(int speed);`                    (0 -255) Calibrates min / max length and potentiometer values
+
+`actuator.recalibrate(int speed);`                  (0 -255) The actuators can be recalibrated by calling method, this is called from a button press in the example sketch.
+
+`BTS7960AD::calibrateAll();`                        **TO DO** call to calibrate all actuators at the same time
+
+`BTS7960AD::recalibrateAll();`                      **TO DO** call to recalibrate all actuators at the same time
+
+`BTS7960AD::averageSpeed ();`                       Returns average speed for all actuators
+
+`actuator.setSpeed(int newSpeed);`                  (0 -255) Sets speed for individual constructor
+
+`actuator.stop();`                                                        Stops the actuator  
+
+`actuator.moveToLimit(int direction, int speed);`                         (1 or 0 or -1, 0 -255)General full extension/retraction using min max readings
+
+`actuator.moveToPercent(BTS7960AD* instance, int percent, int speed);`   **Needs testing** Control Actuator by percent (0-100) and direction (Retract-Extend)
+
+`actuator.moveTo(uint32_t newPosition);`                                 (position in mm) Moves individual actuator
+
+`actuator.moveAllTo(uint32_t position);`                                 (position in mm) Uses existing speed of all actuators to move to position in mm
+
+`actuator.moveAllToAvgSpeed(uint32_t position);`                         (position in mm) Uses average speed of all actuators to move to position in mm
+
+`actuator.moveAllToSetSpeed(uint32_t position, int speed);`              (position in mm, 0-255) Uses defined speed of all actuators to move to position in mm
+
+`BTS7960AD::update();`                                                  Updates millis and calls update(now) which updates position of all actuators with a new target position set
+
+`actuator.getPosition (void);`                                          Returns position in mm
+
+`actuator.displayOutput();`                                             Displays serial output for debugging
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -80,9 +113,9 @@ input value between 0-255
 
 ### Methods
 
-`actuator.controlActuator(1, 127);` Direction and speed
+`actuator.moveToLimit(1, 127);` Direction and speed
 
-`actuator.actuateByDistance(25, 1, 50);` Distance mm, direction and speed
+`actuator.moveTo(50);` Distance mm
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
