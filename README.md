@@ -64,6 +64,8 @@
 
 On initial start the calibrate function will test to see if there are values saved in EEPROM, if not it will fully extend and retract and record the min max values of the potentiometer and save to EEPROM as these can differ from the min max values due to gearing, when the board is re-powered, the values can be pulled from EEPROM saving loading time.
 
+#### Please note: Although the values from the potentiometer are calibrated, this project still requires testing of the mm's travelled 
+
 `actuator.calibrate(int speed);`                    (0 -255) Fully extends and retracts to record min max potentiometer values. 
 
 `actuator.calibrationValues(int min, int max);`     Adds calibration data to eeprom
@@ -88,7 +90,7 @@ On initial start the calibrate function will test to see if there are values sav
 
 `actuator.moveToLimit(int direction, int speed);`                         (1 or 0 or -1, 0 -255)General full extension/retraction using min max readings
 
-`actuator.moveToPercent(BTS7960AD* instance, int percent, int speed);`   **Needs testing** Control Actuator by percent (0-100) and direction (Retract-Extend)
+`actuator.moveToPercent(int percent);`                                    (0-100) Control Actuator by percent of stroke.
 
 `actuator.moveTo(uint32_t newPosition);`                                 (position in mm) Moves individual actuator
 

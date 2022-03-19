@@ -44,7 +44,7 @@ class BTS7960AD {
         
         void stop();                                                        //stops the actuator  
         void moveToLimit(int direction, int speed);                         //General control using min max readings
-        void moveToPercent(BTS7960AD* instance, int percent, int speed); //Control Actuator by percent (0-100) and direction (Retract-Extend)
+        void moveToPercent(int percent);                                    //Control Actuator by percent (0-100) and direction (Retract-Extend)
         void moveTo(uint32_t newPosition);                                  //moves individual actuator
         void moveAllTo(uint32_t position);                                  //uses existing speed of all actuators to move to position in mm
         void moveAllToAvgSpeed(uint32_t position);                          //uses average speed of all actuators to move to position in mm
@@ -62,7 +62,8 @@ class BTS7960AD {
         //Variables
         int speed = 127;
         int sensorVal;
-        float avg;                                                          
+        float avg;
+        int movementBuff = 15;                                                          
         
         
         
@@ -71,14 +72,14 @@ class BTS7960AD {
         //Methods
         void setSpeedInstance(BTS7960AD* instance, int newSpeed);                               //set speed per supplied instance
 
-        int moveToLimitCalibration(int direction, int speed);                //move to limits to set min max readings
-        static void moveByAnalog(BTS7960AD* instance, int speed);
+        int moveToLimitCalibration(int direction, int speed);                                   //move to limits to set min max readings
+        static void moveDirection(BTS7960AD* instance, int speed);                              //sets direction based on current and target positions
         static void setTargetPosition(BTS7960AD* instance, int position);
         
-        static void driveActuator(BTS7960AD* instance, int direction, int speed);             //Control by direction (1= extend, 0= stop, -1= retract) and speed (0-255)
+        static void driveActuator(BTS7960AD* instance, int direction, int speed);               //Control by direction (1= extend, 0= stop, -1= retract) and speed (0-255)
         int percentToAnalog(int percent);
         float postion(float x, float inputMin, float inputMax, float outputMin, float outputMax);
-        
+        int movementBuffer(int newPos, int currentPos);
 
         //Variables
         int en_R;

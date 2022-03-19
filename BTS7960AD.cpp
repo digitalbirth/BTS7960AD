@@ -120,9 +120,6 @@ void BTS7960AD::begin()
   this->minAnalogPosition = (15 * this->id)-10;
   this->maxAnalogPosition = (15 * this->id)-5;
 
-  //actuatorState = true;
-  //moveTo(0);
-  //delay(1000);
   actuatorState = false;
 
 	if(this->debug){
@@ -188,7 +185,9 @@ void BTS7960AD::calibrate(int speed) {
     this->minAnalogReading = EEPROM.get( this->minAnalogPosition, this->minAnalogReading );
     this->maxAnalogReading = EEPROM.get( this->maxAnalogPosition, this->maxAnalogReading );
     this->mmTravel = (this->maxAnalogReading-this->minAnalogReading)/this->stroke;
-    Serial.println("Calibration type: EEPROM");
+    if(this->debug){
+      Serial.println("Calibration type: EEPROM");
+    }
   }else{
     this->maxAnalogReading = moveToLimitCalibration(1, speed);
     EEPROM.put(this->maxAnalogPosition, this->maxAnalogReading);
@@ -197,8 +196,12 @@ void BTS7960AD::calibrate(int speed) {
     this->mmTravel = (this->maxAnalogReading-this->minAnalogReading)/this->stroke;
     this->configValue = 1;
     EEPROM.put( this->configPosition, this->configValue );
-    Serial.println("Calibration type: Initial");
+    if(this->debug){
+      Serial.println("Calibration type: Initial");
+    }
   }
+
+  this->targetPosition = analogRead(this->sensor); //set initial target position the same as current position
 
   if(this->debug){
     Serial.println("CALIBRATION READINGS");
@@ -212,9 +215,12 @@ void BTS7960AD::calibrate(int speed) {
     Serial.println("----------------------------------");
     Serial.println(" ");
   }
-  //driveActuator(0, speed); 
-  Serial.println("----------- CALIBRATION  COMPLETE -----------");
-  Serial.println(" ");
+  //Serial.println("--------------Calibration stop-------------------");
+  driveActuator(this, 0, speed); 
+  if(this->debug){
+    Serial.println("----------- CALIBRATION  COMPLETE -----------");
+    Serial.println(" ");
+  }
 }
 
 //MOVE TO ACTUATOR LIMIT
@@ -229,7 +235,7 @@ int BTS7960AD::moveToLimitCalibration(int direction, int speed){
   }
   do{
     prevReading = currReading;
-    //driveActuator(direction, speed);
+    driveActuator(this, direction, speed);
     delay(period); //keep moving until analog reading remains the same for 200ms    
     currReading = analogRead(this->sensor);
     if(this->debug){
@@ -287,7 +293,7 @@ void BTS7960AD::setSpeedInstance(BTS7960AD* instance, int newSpeed) {
 
 //STOP ACTUATORS
 void BTS7960AD::stop(){
-    digitalWrite(this->en_R, LOW);
+  digitalWrite(this->en_R, LOW);
 	digitalWrite(this->en_L, LOW);
 	if(this->debug){
 		Serial.println("Motor stopped");
@@ -301,70 +307,40 @@ void BTS7960AD::moveToLimit(int direction, int speed){
       sensorVal = analogRead(sensor);
       while(sensorVal < this->maxAnalogReading){
         driveActuator(this, 1, speed);
-        displayOutput();  
+        if(debug){displayOutput();}  
         delay(20);
       }
-      //driveActuator(0, speed);
+      Serial.println("--------------moveToLimit ext-------------------");
+      driveActuator(this, 0, speed);
       break;
       
     case -1:      //retraction
       sensorVal = analogRead(sensor);
       while(sensorVal > this->minAnalogReading){
         driveActuator(this, -1, speed);
-        displayOutput();  
+        if(debug){displayOutput();}   
         delay(20);
       }
+      Serial.println("--------------moveToLimit ret-------------------");
       driveActuator(this, 0, speed);
       break;
   }
 }
 
 //DRIVE ACTUATOR BY PERCENT
-void BTS7960AD::moveToPercent(BTS7960AD* instance, int percent, int speed) {
-  instance->sensorVal = analogRead(instance->sensor);
-  targetPos = percentToAnalog(percent);
-  int direction;
-  
-  if(instance->sensorVal < targetPos){
-    direction = 1;
-  }else if (instance->sensorVal > targetPos){
-    direction = -1;
-  }else{
-    direction = 0;
+void BTS7960AD::moveToPercent(int percent) {
+  int percentCalc = percentToAnalog(percent);
+  if(this->debug){
+    Serial.print("percentToAnalog ");
+    Serial.println(percentCalc);
   }
-  switch(direction){
-    case 1:       //extension
-      if (targetPos > this->maxAnalogReading){
-        targetPos = this->maxAnalogReading;
-      }
-      while(instance->sensorVal < targetPos){
-        driveActuator(instance, 1, speed);
-        displayOutput();  
-        delay(20);
-      }
-      driveActuator(instance, 0, speed);
-      break;
-    case -1:      //retraction
-      if (targetPos < this->minAnalogReading){
-        targetPos = this->minAnalogReading;
-      }
-      while(instance->sensorVal > targetPos){
-        driveActuator(instance, -1, speed);
-        displayOutput();  
-        delay(20);
-      }
-      driveActuator(instance, 0, speed);
-      break;
-    case 0:      //retraction
-      driveActuator(instance, 0, speed);
-      break;
-  } 
+  setTargetPosition(this, percentCalc);
 }
 
 // public call to move single actuator into position IN mm
-void BTS7960AD::moveTo(uint32_t newPosition)
+void BTS7960AD::moveTo(uint32_t position)
 {
-  setTargetPosition(this, newPosition);
+  setTargetPosition(this, position);
 }
 
 // public call to move multiple actuators into position IN mm
@@ -400,73 +376,82 @@ void BTS7960AD::moveAllToSetSpeed(uint32_t position, int speed)
 }
 
 //MOVE BY ANALOG READING
-void BTS7960AD::moveByAnalog(BTS7960AD* instance, int speed) {
+void BTS7960AD::moveDirection(BTS7960AD* instance, int speed) {
   int direction;
   instance->sensorVal = analogRead(instance->sensor);
-  if(instance->sensorVal > instance->newPosition){
+  if(instance->sensorVal > instance->targetPosition){
     direction = -1; // retract
-  } else if (instance->sensorVal < instance->newPosition){
+  } else if (instance->sensorVal < instance->targetPosition){
     direction = 1; // extend
   }else{
     direction = 0;
   }
   switch(direction){
     case 1:       //extension
-      if (instance->newPosition > instance->maxAnalogReading){
-        instance->newPosition = instance->maxAnalogReading;
-      }
-      while(instance->newPosition < instance->sensorVal){
+        //Serial.println("--------------moveDirection ext-------------------");
         driveActuator(instance, 1, speed);
-        //displayOutput();  
-        delay(20);
-      }
-      driveActuator(instance, 0, speed);
+        if(instance->debug){instance->displayOutput();} 
       break;
     case 0:
+      //Serial.println("--------------moveDirection stop-------------------");
       driveActuator(instance, 0, speed);
       break;
     case -1:      //retraction
-      if (instance->newPosition < instance->minAnalogReading){
-        instance->newPosition = instance->minAnalogReading;
-      }
-      while(instance->newPosition > instance->sensorVal){
+        //Serial.println("--------------moveDirection ret-------------------");
         driveActuator(instance, -1, speed);
-        //displayOutput();  
-        delay(20);
-      }
-      driveActuator(instance, 0, speed);
+        if(instance->debug){instance->displayOutput();}  
       break;
   } 
 }
 
 //DRIVE ACTUATORS without control
 void BTS7960AD::driveActuator(BTS7960AD* instance, int direction, int speed){
+  instance->currentPosition = analogRead(instance->sensor); //read currentPosition
   if(instance->debug){
     Serial.print("driveActuator (speed, dir) = \t");
     Serial.print(speed);
     Serial.print(", ");	
-    Serial.println(direction);	
+    Serial.println(direction);
+    Serial.println("");	
   }
   switch(direction){
     case 1:       //extension
       analogWrite(instance->pwm_L, 0);
       analogWrite(instance->pwm_R, speed);
-      Serial.println("");
-      Serial.println("ACTUATOR EXTENDING");
+      if(instance->debug){
+        Serial.print("ACTUATOR EXTENDING \t");
+        Serial.print(instance->id);
+        Serial.print("\t target \t");
+        Serial.print(instance->targetPosition);
+        Serial.print("\t current \t");
+        Serial.println(instance->currentPosition);
+      }
       break;
    
     case 0:       //stopping
       analogWrite(instance->pwm_R, 0);
       analogWrite(instance->pwm_L, 0);
-      Serial.println("");
-      Serial.println("ACTUATOR STOPPED");
+      if(instance->debug){
+        Serial.print("ACTUATOR STOPPED \t");
+        Serial.print(instance->id);
+        Serial.print("\t target \t");
+        Serial.print(instance->targetPosition);
+        Serial.print("\t current \t");
+        Serial.println(instance->currentPosition);
+      }
       break;
 
     case -1:      //retraction
       analogWrite(instance->pwm_R, 0);
       analogWrite(instance->pwm_L, speed);
-      Serial.println("");
-      Serial.println("ACTUATOR RETRACTING");
+      if(instance->debug){
+        Serial.print("ACTUATOR RETRACTING \t");
+        Serial.print(instance->id);
+        Serial.print("\t target \t");
+        Serial.print(instance->targetPosition);
+        Serial.print("\t current \t");
+        Serial.println(instance->currentPosition);
+      }
       break;
   }
 }
@@ -497,50 +482,41 @@ void BTS7960AD::update(uint32_t now)
   for(int i = 0; i < instanceCount; i++)
   {
     instances[i]->currentPosition = analogRead(instances[i]->sensor);
-    Serial.print("Actuator: ");
-    Serial.print(i);
-    Serial.print(" currentPosition: ");
-    Serial.println(instances[i]->currentPosition);
+    // Serial.print("Actuator: ");
+    // Serial.print(i);
+    // Serial.print("\t targetPosition ");
+    // Serial.print(instances[i]->targetPosition);
+    // Serial.print(" currentPosition: ");
+    // Serial.println(instances[i]->currentPosition);
+
+
     switch (instances[i]->motionState)
     {
       case ACTUATOR_MOVING:
-        Serial.println("ACTUATOR_MOVING");
-        if(now - instances[i]->lastMotionMillis > MOTION_SPEED_INTERVAL) // time interval
-        {
-          if(instances[i]->targetPosition == instances[i]->currentPosition) //if target is equal to current position
-          {
-            if(instances[i]->actuatorState) //set to standby
-            {
+        //Serial.println("ACTUATOR_MOVING");
+        
+        if(now - instances[i]->lastMotionMillis > MOTION_SPEED_INTERVAL) // if time interval has elapsed
+        { 
+          if(instances[i]->movementBuffer(instances[i]->targetPosition, instances[i]->currentPosition) < instances[i]->movementBuff){       //if target and current difference is less to 20 do nothing  
+            if(instances[i]->actuatorState){ //set to standby
               instances[i]->actuatorState = false;
               instances[i]->motionState = ACTUATOR_STANDBY;
+              driveActuator(instances[i],0,0);
+              if(instances[i]->debug){
+                Serial.println("SET ACTUATOR_STANDBY");
+              }
               instances[i]->endCallback(instances[i]->getPosition());
             }
-          }
-          else //if target is NOT equal to current position
-          {
-            if(!instances[i]->actuatorState) 
-            {
+          }else{                                          ///if target and current difference is greater than 20 move
+            if(!instances[i]->actuatorState) {
               instances[i]->actuatorState = true;
             }
-            if(instances[i]->targetPosition > instances[i]->currentPosition)  //if target is greater than current expand
-            {
-              instances[i]->newPosition = instances[i]->currentPosition++;
-              moveByAnalog(instances[i], instances[i]->speed);
-              //change to actually move actuator
-              Serial.print("Actuator: ");
-              Serial.print(i);
-              Serial.print(" Moving to: ");
-              Serial.println(instances[i]->newPosition);
-            }
-            else                                                            //if target is less than than current retract
-            {
-              instances[i]->newPosition = instances[i]->currentPosition--;
-              moveByAnalog(instances[i], instances[i]->speed);
-              //change to actually move actuator
-              Serial.print("Actuator: ");
-              Serial.print(i);
-              Serial.print(" Moving to: ");
-              Serial.println(instances[i]->newPosition);
+            instances[i]->currentPosition = analogRead(instances[i]->sensor);
+            moveDirection(instances[i], instances[i]->speed);
+            if(instances[i]->targetPosition > instances[i]->currentPosition){                          //if target is greater than current expand
+              // Serial.println("EXPAND");
+            }else if (instances[i]->targetPosition < instances[i]->currentPosition){                  //if target is less than than current retract
+              // Serial.println("RETRACT");
             }
           }
           instances[i]->lastMotionMillis = now;
@@ -548,9 +524,9 @@ void BTS7960AD::update(uint32_t now)
         break;
       case ACTUATOR_STANDBY:
         //Serial.println("ACTUATOR_STANDBY");
-        if(instances[i]->targetPosition != instances[i]->currentPosition)    
-        {
+        if(instances[i]->movementBuffer(instances[i]->targetPosition, instances[i]->currentPosition) > instances[i]->movementBuff){
           instances[i]->motionState = ACTUATOR_MOVING;
+          //Serial.println("SET ACTUATOR_MOVING");
           instances[i]->startCallback(instances[i]->getPosition());
         }
       break;
@@ -577,7 +553,7 @@ float BTS7960AD::getPosition(void)
 
 //PERCENT TO ANALOG 0-100 TO 0-255
 int BTS7960AD::percentToAnalog(int percent){
-  return map(percent, 0,100,0,1023);
+  return map(percent, 0,100,0, this->stroke);
 }//percentToAnalog(10);
 
 //collect all speeds and calculate average
@@ -593,6 +569,15 @@ float BTS7960AD::averageSpeed()
   //Serial.println(((float) sum) / instanceCount);
 
   return  ((float) sum) / instanceCount ;  // average will be fractional, so float may be appropriate.
+}
+
+//Movement Buffer Calculator
+int BTS7960AD::movementBuffer(int newPos, int currentPos) {
+  int buff = newPos - currentPos;
+  if(buff < 0){
+    buff=-buff;
+  }
+  return buff;
 }
 
 //SERIAL OUTPUT
